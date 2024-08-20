@@ -75,7 +75,7 @@ services:
       - app-network
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:latest
     container_name: ${PROJECT_NAME}_phpmyadmin
     restart: unless-stopped
     environment:
@@ -98,7 +98,7 @@ EOL
 
 # Create PHP Dockerfile
 cat <<EOL > $PROJECT_NAME/php/Dockerfile
-FROM php:7.4-fpm
+FROM php:8.3-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \\
@@ -111,7 +111,7 @@ RUN apt-get update && apt-get install -y \\
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-# RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# RUN docker-php-ext-install pdo_mysql
 
 # Set working directory
 WORKDIR /var/www/html
